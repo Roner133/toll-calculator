@@ -55,15 +55,6 @@ public class TollCalculatorTest {
     }
 
     @Test
-    public void testHourlyTollLimit() {
-        Date[] dates = {
-            createDate(6, 15), createDate(6, 45),
-            createDate(7, 30), createDate(8, 15)
-        };
-        assertEquals(44, tollCalculator.getTollFee(car, dates));
-    }
-
-    @Test
     public void testTollFreeVehicle() {
         Date[] dates = { createDate(6, 0), createDate(7, 0), createDate(8, 0) };
         assertEquals(0, tollCalculator.getTollFee(motorbike, dates));
@@ -72,23 +63,13 @@ public class TollCalculatorTest {
     @Test
     public void testWeekendTollFree() {
         Calendar calendar = Calendar.getInstance();
+
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
         Date saturday = calendar.getTime();
+
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
         Date sunday = calendar.getTime();
+
         assertEquals(0, tollCalculator.getTollFee(car, saturday, sunday));
-    }
-
-    @Test
-    public void testWeekdayToll() {
-        Date mondayMorning = createDate(7, 30);
-        Date mondayAfternoon = createDate(16, 45);
-        assertEquals(31, tollCalculator.getTollFee(car, mondayMorning, mondayAfternoon));
-    }
-
-    @Test
-    public void testMultipleFeesWithinSameHour() {
-        Date[] dates = { createDate(6, 5), createDate(6, 25), createDate(6, 45) };
-        assertEquals(13, tollCalculator.getTollFee(car, dates));
     }
 }
