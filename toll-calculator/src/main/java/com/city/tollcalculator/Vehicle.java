@@ -1,5 +1,5 @@
-package com.city.TollCalculator;
+package com.city.tollcalculator;
 
 public interface Vehicle {
-  String getType();
+    String getType();
 }
